@@ -1,3 +1,4 @@
+import /system/etc/init/hw/init.safailnet.rc
 
 on init
     # Boot time FS tune
