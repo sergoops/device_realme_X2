@@ -76,7 +76,11 @@ PRODUCT_PACKAGES += \
 # Doze
 PRODUCT_PACKAGES += \
     RealmeProximityHelper \
-    RealmeDoze
+    RealmeDoze \
+    RealmeParts
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/parts/init/RealmeParts.rc:$(TARGET_COPY_OUT_SYSTEM)/etc/init/RealmeParts.rc
 
 # Fingerprint
 PRODUCT_PACKAGES += \
