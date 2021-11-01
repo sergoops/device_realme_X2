@@ -61,8 +61,7 @@ PRODUCT_PACKAGES += \
 
 # Common init scripts
 PRODUCT_PACKAGES += \
-    init.qcom.rc \
-    init.devicesetting.rc
+    init.qcom.rc
 
 PRODUCT_PACKAGES += \
     fstab.qcom
@@ -76,7 +75,6 @@ PRODUCT_PACKAGES += \
 
 # Doze
 PRODUCT_PACKAGES += \
-    devicesettings \
     RealmeProximityHelper \
     RealmeDoze
 
