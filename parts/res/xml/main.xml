@@ -64,11 +64,15 @@
             android:summary="@string/hbm_mode_summary"
             android:title="@string/hbm_mode_title" />
 
-        <SwitchPreference
+        <com.realmeparts.SecureSettingListPreference
             android:icon="@drawable/srgb_mode_icon"
-            android:key="srgb"
-            android:summary="@string/srgb_mode_summary"
-            android:title="@string/srgb_mode_title" />
+            android:defaultValue="0"
+            android:dialogTitle="@string/seed_summary"
+            android:entries="@array/seed_profiles"
+            android:entryValues="@array/seed_values"
+            android:key="seed"
+            android:summary="@string/seed_mode_summary"
+            android:title="@string/seed_title" />
 
         <SwitchPreference
             android:icon="@drawable/game_mode_icon"

@@ -40,7 +40,7 @@ import java.text.DecimalFormat;
 public class DeviceSettings extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
-    public static final String KEY_SRGB_SWITCH = "srgb";
+    public static final String KEY_SEED = "seed";
     public static final String KEY_HBM_SWITCH = "hbm";
     public static final String KEY_DC_SWITCH = "dc";
     public static final String KEY_OTG_SWITCH = "otg";
@@ -53,6 +53,7 @@ public class DeviceSettings extends PreferenceFragment
     public static final String KEY_SETTINGS_PREFIX = "device_setting_";
     public static final String TP_LIMIT_ENABLE = "/proc/touchpanel/oppo_tp_limit_enable";
     public static final String TP_DIRECTION = "/proc/touchpanel/oppo_tp_direction";
+    private static final String SEED_PATH = "/sys/kernel/oppo_display/seed";    
     private static final String KEY_CATEGORY_CHARGING = "charging";
     private static final String KEY_CATEGORY_GRAPHICS = "graphics";
     public static SecureSettingListPreference mChargingSpeed;
@@ -63,7 +64,7 @@ public class DeviceSettings extends PreferenceFragment
     public TwoStatePreference mDNDSwitch;
     public PreferenceCategory mPreferenceCategory;
     private TwoStatePreference mDCModeSwitch;
-    private TwoStatePreference mSRGBModeSwitch;
+    protected static SecureSettingListPreference mSeedModeSwitch;
     private TwoStatePreference mHBMModeSwitch;
     private TwoStatePreference mOTGModeSwitch;
     private TwoStatePreference mGameModeSwitch;
@@ -85,10 +86,10 @@ public class DeviceSettings extends PreferenceFragment
         mDCModeSwitch.setChecked(DCModeSwitch.isCurrentlyEnabled(this.getContext()));
         mDCModeSwitch.setOnPreferenceChangeListener(new DCModeSwitch());
 
-        mSRGBModeSwitch = findPreference(KEY_SRGB_SWITCH);
-        mSRGBModeSwitch.setEnabled(SRGBModeSwitch.isSupported());
-        mSRGBModeSwitch.setChecked(SRGBModeSwitch.isCurrentlyEnabled(this.getContext()));
-        mSRGBModeSwitch.setOnPreferenceChangeListener(new SRGBModeSwitch());
+        mSeedModeSwitch = (SecureSettingListPreference) findPreference(KEY_SEED);
+        mSeedModeSwitch.setValue(Utils.getFileValue(SEED_PATH, "0"));
+        mSeedModeSwitch.setSummary(mSeedModeSwitch.getEntry());
+        mSeedModeSwitch.setOnPreferenceChangeListener(this);
 
         mHBMModeSwitch = (TwoStatePreference) findPreference(KEY_HBM_SWITCH);
         mHBMModeSwitch.setEnabled(HBMModeSwitch.isSupported());
@@ -146,6 +147,14 @@ public class DeviceSettings extends PreferenceFragment
             mChargingSpeed.setValue((String) newValue);
             mChargingSpeed.setSummary(mChargingSpeed.getEntry());
         }
+        if (preference == mSeedModeSwitch){
+            int thisvalue = Integer.valueOf((String) newValue);
+            mSeedModeSwitch.setValue((String) newValue);
+            mSeedModeSwitch.setSummary(mSeedModeSwitch.getEntry());
+            SharedPreferences.Editor prefChange = PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
+            prefChange.putInt(KEY_SEED, thisvalue).commit();
+            Utils.writeValue(SEED_PATH, (String) newValue);
+        }        
         return true;
     }
 

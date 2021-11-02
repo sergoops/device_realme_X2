@@ -81,9 +81,9 @@
             </intent-filter>
         </service>
         <service
-            android:name="com.realmeparts.SRGBModeTileService"
+            android:name="com.realmeparts.SeedTileService"
             android:icon="@drawable/ic_srgb_tile"
-            android:label="@string/tile_srgb_mode"
+            android:label="@string/seed_title"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
             android:exported="true">
             <intent-filter>
