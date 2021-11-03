@@ -79,7 +79,7 @@ PRODUCT_PACKAGES += \
 
 # Doze
 PRODUCT_PACKAGES += \
-    RealmeProximityHelper \
+    RealmeHardwareAssist \
     RealmeDoze \
     RealmeParts
 
