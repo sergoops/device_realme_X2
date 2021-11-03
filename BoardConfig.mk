@@ -85,6 +85,12 @@ TARGET_FWK_SUPPORTS_FULL_VALUEADDS := true
 # Camera
 TARGET_USES_QTI_CAMERA_DEVICE := true
 
+# SurfaceFlinger
+TARGET_USE_AOSP_SURFACEFLINGER := true
+
+# HWUI
+HWUI_COMPILE_FOR_PERF := true
+
 # Dex
 ifeq ($(HOST_OS),linux)
   ifneq ($(TARGET_BUILD_VARIANT),eng)
