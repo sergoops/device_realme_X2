@@ -221,7 +221,7 @@ Return<RequestStatus> BiometricsFingerprint::authenticate(uint64_t operationId, 
     if (status == RequestStatus::SYS_OK) {
         setFingerprintScreenState(true);
     }
-    return OppoToAOSPRequestStatus(mOppoBiometricsFingerprint->authenticate(operationId, gid));
+    return status;
 }
 
 Return<bool> BiometricsFingerprint::isUdfps(uint32_t) { return true; }
