@@ -67,6 +67,10 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno618
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
+# Power
+TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/double_tap_enable"
+TARGET_USES_INTERACTION_BOOST := true
+
 #Board init
 TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_x2
 TARGET_RECOVERY_DEVICE_MODULES := libinit_x2
@@ -159,8 +163,6 @@ SELINUX_IGNORE_NEVERALLOWS := true
 
 # System-as-root
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
-
-TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/double_tap_enable"
 
 # Verified Boot
 BOARD_AVB_ENABLE := true

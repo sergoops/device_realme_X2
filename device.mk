@@ -149,7 +149,10 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    power.qcom:64
+    android.hardware.power-service.x2
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/power/config/powerhint.xml:$(TARGET_COPY_OUT_PRODUCT)/vendor_overlay/$(PRODUCT_TARGET_VNDK_VERSION)/etc/powerhint.xml
 
 # QTI
 PRODUCT_COPY_FILES += \

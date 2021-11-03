@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2012-2013,2015-2017, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2019-2020 The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * *    * Redistributions of source code must retain the above copyright
+ *     * Redistributions of source code must retain the above copyright
  *       notice, this list of conditions and the following disclaimer.
  *     * Redistributions in binary form must reproduce the above
  *       copyright notice, this list of conditions and the following
@@ -27,21 +27,32 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <cutils/properties.h>
+#ifndef ANDROID_HARDWARE_POWER_POWER_H
+#define ANDROID_HARDWARE_POWER_POWER_H
 
-int sysfs_read(char *path, char *s, int num_bytes);
-int sysfs_write(char *path, char *s);
-int get_scaling_governor(char governor[], int size);
-int get_scaling_governor_check_cores(char governor[], int size,int core_num);
-int is_interactive_governor(char*);
+#include <aidl/android/hardware/power/BnPower.h>
+#include "power-common.h"
 
-void vote_ondemand_io_busy_off();
-void unvote_ondemand_io_busy_off();
-void vote_ondemand_sdf_low();
-void unvote_ondemand_sdf_low();
-void perform_hint_action(int hint_id, int resource_values[],
-    int num_resources);
-void undo_hint_action(int hint_id);
-void release_request(int lock_handle);
-int interaction_with_handle(int lock_handle, int duration, int num_args, int opt_list[]);
-int perf_hint_enable(int hint_id, int duration);
+namespace aidl {
+namespace android {
+namespace hardware {
+namespace power {
+namespace impl {
+
+class Power : public BnPower {
+    public:
+        Power() : BnPower(){
+            power_init();
+        }
+        ndk::ScopedAStatus setMode(Mode type, bool enabled) override;
+        ndk::ScopedAStatus isModeSupported(Mode type, bool* _aidl_return) override;
+        ndk::ScopedAStatus setBoost(Boost type, int32_t durationMs) override;
+        ndk::ScopedAStatus isBoostSupported(Boost type, bool* _aidl_return) override;
+};
+
+}  // namespace impl
+}  // namespace power
+}  // namespace hardware
+}  // namespace android
+}  // namespace aidl
+#endif  // ANDROID_HARDWARE_POWER_POWER_H
