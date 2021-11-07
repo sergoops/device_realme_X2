@@ -59,6 +59,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Snap
 
+# Modified camera libs
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/camera/,$(TARGET_COPY_OUT_SYSTEM))
+
 # Common init scripts
 PRODUCT_PACKAGES += \
     init.qcom.rc

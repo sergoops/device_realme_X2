@@ -186,6 +186,13 @@ on post-fs-data
     mount none /system/lib/soundfx/libvolumelistener.so /vendor/lib/soundfx/libvolumelistener.so bind
     mount none /system/lib/hw/android.hardware.sensors@1.0-impl.x2.so /vendor/lib/hw/android.hardware.sensors@1.0-impl.so bind
     mount none /system/lib64/hw/android.hardware.sensors@1.0-impl.x2.so /vendor/lib64/hw/android.hardware.sensors@1.0-impl.so bind
+    mount none /system/lib64/hw/com.qti.chi.override_moorea.so /vendor/lib64/hw/com.qti.chi.override_moorea.so bind
+    mount none /system/lib64/camera/com.qti.sensor.s5kgw1.so /vendor/lib64/camera/com.qti.sensor.s5kgw1.so bind
+    mount none /system/lib64/camera/com.qti.sensormodule.ofilm_s5kgd1sp.bin /vendor/lib64/camera/com.qti.sensormodule.ofilm_s5kgd1sp.bin bind
+    mount none /system/lib64/camera/com.qti.sensormodule.sunny_s5kgw1_v0.bin /vendor/lib64/camera/com.qti.sensormodule.sunny_s5kgw1_v0.bin bind
+    mount none /system/lib64/camera/com.qti.sensormodule.sunny_s5kgw1_v1.bin /vendor/lib64/camera/com.qti.sensormodule.sunny_s5kgw1_v1.bin bind
+    mount none /system/etc/camera/camxoverridesettings.txt /vendor/etc/camera/camxoverridesettings.txt bind
+    mount none /system/etc/camera/eisoverridesettings.txt /vendor/etc/camera/eisoverridesettings.txt bind
 
 service vendor.imsdatadaemon /vendor/bin/imsdatadaemon
     override
