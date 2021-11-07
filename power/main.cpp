@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2012-2013,2015-2017, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2020, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- * *    * Redistributions of source code must retain the above copyright
+ *     * Redistributions of source code must retain the above copyright
  *       notice, this list of conditions and the following disclaimer.
  *     * Redistributions in binary form must reproduce the above
  *       copyright notice, this list of conditions and the following
@@ -27,21 +27,27 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <cutils/properties.h>
+#include "Power.h"
 
-int sysfs_read(char *path, char *s, int num_bytes);
-int sysfs_write(char *path, char *s);
-int get_scaling_governor(char governor[], int size);
-int get_scaling_governor_check_cores(char governor[], int size,int core_num);
-int is_interactive_governor(char*);
+#include <android-base/logging.h>
+#include <android/binder_manager.h>
+#include <android/binder_process.h>
 
-void vote_ondemand_io_busy_off();
-void unvote_ondemand_io_busy_off();
-void vote_ondemand_sdf_low();
-void unvote_ondemand_sdf_low();
-void perform_hint_action(int hint_id, int resource_values[],
-    int num_resources);
-void undo_hint_action(int hint_id);
-void release_request(int lock_handle);
-int interaction_with_handle(int lock_handle, int duration, int num_args, int opt_list[]);
-int perf_hint_enable(int hint_id, int duration);
+using aidl::android::hardware::power::impl::Power;
+
+int main() {
+    ABinderProcess_setThreadPoolMaxThreadCount(0);
+    std::shared_ptr<Power> vib = ndk::SharedRefBase::make<Power>();
+    const std::string instance = std::string() + Power::descriptor + "/default";
+    LOG(INFO) << "Instance " << instance;
+    if(vib){
+        binder_status_t status = AServiceManager_addService(vib->asBinder().get(), instance.c_str());
+        LOG(INFO) << "Status " << status;
+        if(status != STATUS_OK){
+            LOG(ERROR) << "Could not register" << instance;
+        }
+    }
+
+    ABinderProcess_joinThreadPool();
+    return 1;  // should not reach
+}
