@@ -6,11 +6,11 @@
 
 $(call inherit-product, device/realme/X2/device.mk)
 
-# Inherit some common krypton stuff.
-$(call inherit-product, vendor/krypton/configs/KryptonCommon.mk)
+# Inherit some common Fluid stuff.
+$(call inherit-product, vendor/fluid/config/common_full_phone.mk)
 
 # Device identifier. This must come after all inclusions.
-PRODUCT_NAME := krypton_X2
+PRODUCT_NAME := fluid_X2
 PRODUCT_DEVICE := X2
 PRODUCT_BRAND := realme
 PRODUCT_MODEL := realme X2
