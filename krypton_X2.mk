@@ -9,6 +9,9 @@ $(call inherit-product, device/realme/X2/device.mk)
 # Inherit some common krypton stuff.
 $(call inherit-product, vendor/krypton/configs/KryptonCommon.mk)
 
+TARGET_BUILD_LAWNCHAIR := false
+TARGET_BUILD_VIA_BROWSER := false
+
 # Device identifier. This must come after all inclusions.
 PRODUCT_NAME := krypton_X2
 PRODUCT_DEVICE := X2
