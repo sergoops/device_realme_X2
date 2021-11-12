@@ -15,4 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/krypton_X2.mk
+    $(LOCAL_DIR)/p404_X2.mk

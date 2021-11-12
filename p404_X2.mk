@@ -6,14 +6,14 @@
 
 $(call inherit-product, device/realme/X2/device.mk)
 
-# Inherit some common krypton stuff.
-$(call inherit-product, vendor/krypton/configs/KryptonCommon.mk)
+# Inherit common 404 configuration
+$(call inherit-product, vendor/404/configs/common.mk)
 
-TARGET_BUILD_LAWNCHAIR := false
-TARGET_BUILD_VIA_BROWSER := false
+$(call inherit-product, vendor/google/pixel/config.mk)
+$(call inherit-product, vendor/google/gms/config.mk)
 
 # Device identifier. This must come after all inclusions.
-PRODUCT_NAME := krypton_X2
+PRODUCT_NAME := p404_X2
 PRODUCT_DEVICE := X2
 PRODUCT_BRAND := realme
 PRODUCT_MODEL := realme X2
